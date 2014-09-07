@@ -1,4 +1,12 @@
 <?php
+/**
+ * Task for downloading Bank information from data obtained from PaymentsNZ
+ * This parses the file and creates a Bank model from each line
+ * The data is no longer tab-delimited and depends on the db column lengths
+ * defined on your model. See notes on Bank::$db for more information
+ * @author  Elliot Sawyer <elliot.sawyer@gmail.com>
+ * @license MIT https://github.com/silverstripe-elliot/nzbankvalidator/blob/master/LICENSE
+ */
 class DownloadDataFromPaymentsNZTask extends BuildTask {
 	public $title = 'Download bank branch information from PaymentsNZ';
 	public $description = 'This information is publicly available from Payments NZ. Load NZ bank information into the database so the application can identify bank account numbers.';

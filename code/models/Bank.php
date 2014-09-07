@@ -1,4 +1,10 @@
 <?php
+/**
+ * Bank model - describes a Bank from data obtained from PaymentsNZ
+ * @author  Elliot Sawyer <elliot.sawyer@gmail.com>
+ * @license MIT https://github.com/silverstripe-elliot/nzbankvalidator/blob/master/LICENSE
+ */
+
 class Bank extends DataObject {
 	private static $indexes = array(
 		'BankNumber' => true,
@@ -48,12 +54,20 @@ class Bank extends DataObject {
 		'LatestStatus' => 'VarChar(1)' //A = Added/new record,M = Modified,U = Update/no change,C = Closed
 	);
 
+	/*
+	* Getter for the six digit Bank prefix
+	* This is *not* the same as NationalClearingCode, which can be empty
+	 */
 	public function getPrefix() {
 		return $this->BankNumber.$this->BranchNumber;
 	}
 	/*
 	* Identifies a bank branch by the first six digits of the account number
-	* @param accountNumber - an NZ Bank account number. All non-digits will be stripped, but you should attempt to clean up as much as possible
+	* This is not the same as bank account validation, which validates against a checksum
+	* See information in the NZBankAccount class for information on doing this.
+	* 
+	* @param accountNumber - an NZ Bank account number. All non-digits will be stripped
+	*                         but you should attempt to clean up as much as possible
 	*                        Only the first six numbers are used, the rest are discarded
 	* @return the Bank object or false if it couldn't be identified
 	 */

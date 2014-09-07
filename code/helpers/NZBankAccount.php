@@ -1,4 +1,9 @@
 <?php
+/**
+ * Bank admin - administers Bank models
+ * @author  Elliot Sawyer <elliot.sawyer@gmail.com>
+ * @license MIT https://github.com/silverstripe-elliot/nzbankvalidator/blob/master/LICENSE
+ */
 class NZBankAccount extends Object{
 	//these algorithm weights are determined by IRD
 	//http://www.ird.govt.nz/resources/3/b/3baac88049703941b60dbf37e0942771/rwt-nrwt-spec-2012.pdf
@@ -20,6 +25,13 @@ class NZBankAccount extends Object{
 		'x' => [0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0, 1]
 	];
 
+	/**
+	 * Array of bank ID's, which map to an array (
+	 * 		[algorithm] => specific ranges (comma delimited)
+	 * These numbers are derived by the IRD here:
+	 * 	http://www.ird.govt.nz/resources/3/b/3baac88049703941b60dbf37e0942771/rwt-nrwt-spec-2012.pdf
+	 * @var array
+	 */
 	public static $bank_ids = [
 		'01' => [' ' => '0001-0999,1100-1199,1800-1899'],
 		'02' => [' ' => '0001-0999,1200-1299'],
@@ -53,7 +65,10 @@ class NZBankAccount extends Object{
 		'38' => [' ' => '9000-9499'],
 	];
 
-	/**
+	/*** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	 * TEST TEST TEST - UNFINISHED - TEST TEST TEST
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	 * 
 	 * Validate a NZ bank account number against IRD specifications
 	 * Requires a bank ID, branch, account, and suffix
 	 * Components are to be delimited by non-numerics (space, dash, etc)
@@ -95,6 +110,10 @@ class NZBankAccount extends Object{
 		return false;
 	}
 
+	/*** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	 * TEST TEST TEST - UNFINISHED - TEST TEST TEST
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	*/
 	private static function within_range($number, $minimum, $maximum = null) {
 		$number = (int) $number;
 		$minimum = (int) $minimum;
